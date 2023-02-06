@@ -10,7 +10,7 @@ type CarsType = {
 }
 
 const NewComponent = (props: NewComponentPropsType) => {
-    const cars = props.cars;
+    const { cars } = props;
 
     return (
         <table>
