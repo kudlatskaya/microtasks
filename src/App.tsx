@@ -3,16 +3,17 @@ import logo from './logo.svg';
 import './App.css';
 import NewComponent from "./NewComponent";
 
-const students = [
-    {id: 1, name: 'name1', age: 10},
-    {id: 2, name: 'name2', age: 20},
-    {id: 3, name: 'name3', age: 30},
-];
+const topCars = [
+    {manufacturer:'BMW', model:'m5cs'},
+    {manufacturer:'Mercedes', model:'e63s'},
+    {manufacturer:'Audi', model:'rs6'}
+]
+
 
 function App() {
   return (
     <div className="App">
-      <NewComponent students={students}/>
+      <NewComponent cars={topCars}/>
     </div>
   );
 }
