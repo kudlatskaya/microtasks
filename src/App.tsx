@@ -5,6 +5,8 @@ import NewComponent from "./components/NewComponent";
 import Button from "./components/Button";
 import UseState from "./components/UseState";
 import Money from "./components/Money";
+import Message from "./components/Input/Message";
+import Message1 from "./components/Input/Message1";
 
 const topCars = [
     {manufacturer: 'BMW', model: 'm5cs'},
@@ -32,6 +34,9 @@ function App() {
 
     return (
         <div className="App">
+            <h2>input</h2>
+            <Message1 />
+            <Message />
             <h2>filter</h2>
             <Money money={money}/>
 
