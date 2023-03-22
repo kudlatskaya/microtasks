@@ -68,7 +68,8 @@ function TodoMicrotask() {
     function addTask(_todolistID: string, title: string) {
         let task = {id: v1(), title: title, isDone: false};
         let todolist = tasks[_todolistID];
-        let newTasks = [task, ...tasks];
+        tasks[_todolistID] = [...todolist, task];
+        let newTasks = {...tasks, [_todolistID]: tasks[_todolistID]};
         setTasks(newTasks);
     }
 
