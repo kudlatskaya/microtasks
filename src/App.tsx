@@ -7,6 +7,7 @@ import UseState from "./components/UseState";
 import Money from "./components/Money";
 import Message from "./components/Input/Message";
 import Message1 from "./components/Input/Message1";
+import TodoMicrotask from "./components/todo/TodoMicrotask";
 
 const topCars = [
     {manufacturer: 'BMW', model: 'm5cs'},
@@ -34,19 +35,21 @@ function App() {
 
     return (
         <div className="App">
-            <h2>input</h2>
+            <h2>1. input</h2>
             <Message1 />
             <Message />
-            <h2>filter</h2>
+            <h2>2. filter</h2>
             <Money money={money}/>
 
-            <h2>useSate hook</h2>
+            <h2>3. useSate hook</h2>
             <UseState />
-            <h2>Button handler onClick (callback)</h2>
+            <h2>4. Button handler onClick (callback)</h2>
             <Button name={"Button1"} callBack={() => {writeCarName1("carName1")}} />
             <Button name={"Button2"} callBack={() => {writeCarName1("carName2")}} />
-            <h2>map</h2>
+            <h2>5. map</h2>
             <NewComponent cars={topCars} />
+            <h2>6. todolist</h2>
+            <TodoMicrotask />
         </div>
 );
 }
