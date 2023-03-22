@@ -32,8 +32,8 @@ function TodoMicrotask() {
     // ]);
     // let [filter, setFilter] = useState<FilterValuesType>("all");
 
-    let todolistID1=v1();
-    let todolistID2=v1();
+    let todolistID1 = v1();
+    let todolistID2 = v1();
 
     let [todolistID, setTodolistID] = useState<string>(todolistID1)
     let [filter, setFilter] = useState<FilterValuesType>("all");
@@ -44,14 +44,14 @@ function TodoMicrotask() {
     ])
 
     let [tasks, setTasks] = useState<TasksType>({
-        [todolistID1]:[
+        [todolistID1]: [
             {id: v1(), title: "HTML&CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},
             {id: v1(), title: "ReactJS", isDone: false},
             {id: v1(), title: "Rest API", isDone: false},
             {id: v1(), title: "GraphQL", isDone: false},
         ],
-        [todolistID2]:[
+        [todolistID2]: [
             {id: v1(), title: "HTML&CSS2", isDone: true},
             {id: v1(), title: "JS2", isDone: true},
             {id: v1(), title: "ReactJS2", isDone: false},
@@ -65,41 +65,49 @@ function TodoMicrotask() {
         setTasks(filteredTasks);
     }
 
-    function addTask(title: string) {
+    function addTask(_todolistID: string, title: string) {
         let task = {id: v1(), title: title, isDone: false};
+        let todolist = tasks[_todolistID];
         let newTasks = [task, ...tasks];
         setTasks(newTasks);
     }
 
     function changeStatus(_todolistID: string, taskId: string, isDone: boolean) {
-        let task = tasks[_todolistID].find(t => t.id === taskId);
-        if (task) {
-            task.isDone = isDone;
-        }
+        let todoList = tasks[_todolistID];
 
-        setTasks([...tasks]);
+        let _todoList = todoList.map(item =>
+            item.id === taskId
+                ? {...item, isDone: isDone}
+                : item
+        )
+
+        tasks[_todolistID] = _todoList;
+
+        setTasks({...tasks});
     }
 
-    const filterTasks = (_todolistID: string, _filter: string) => {
-        if (_filter === "all") return tasks[_todolistID];
-
-        if (_filter === "active") {
-            return tasks[_todolistID].filter(t => t.isDone === false);
-        }
-        if (_filter === "completed") {
-            return tasks[_todolistID].filter(t => t.isDone === true);
+    const filterTasks  = (_todolistID: string, _filter: string) => {
+        switch(_filter) {
+            case "all":
+                return tasks[_todolistID];
+            case "active":
+                return tasks[_todolistID].filter(t => t.isDone === false);
+            case "completed":
+                return tasks[_todolistID].filter(t => t.isDone === true);
+            default:
+                return tasks;
         }
     }
 
+    // let tasksForTodolist = tasks;
     let tasksForTodolist = filterTasks(todolistID, filter);
-
 
 
     function changeFilter(value: FilterValuesType) {
         setFilter(value);
     }
 
-    const changeTodolistID = (_id: string):void => {
+    const changeTodolistID = (_id: string): void => {
         setTodolistID(_id)
     }
 
