@@ -44,6 +44,7 @@ export function Todolist(props: PropsType) {
         }
     }
 
+
     const onAllClickHandler = () => {
         props.changeFilter("all");
         props.changeTodolistID(props.todolistID);
