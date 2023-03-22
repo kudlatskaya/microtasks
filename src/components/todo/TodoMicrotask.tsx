@@ -60,15 +60,20 @@ function TodoMicrotask() {
         ]
     });
 
-    function removeTask(id: string) {
-        let filteredTasks = tasks.filter(t => t.id != id);
-        setTasks(filteredTasks);
+    function removeTask(_todolistID: string, id: string) {
+        let todolist = tasks[_todolistID];
+        let filteredTasks = todolist.filter(t => t.id != id);
+
+        let newTasks = {...tasks, [_todolistID]: [...filteredTasks]}
+        setTasks(newTasks);
     }
 
     function addTask(_todolistID: string, title: string) {
         let task = {id: v1(), title: title, isDone: false};
+
         let todolist = tasks[_todolistID];
         tasks[_todolistID] = [...todolist, task];
+
         let newTasks = {...tasks, [_todolistID]: tasks[_todolistID]};
         setTasks(newTasks);
     }
@@ -96,13 +101,12 @@ function TodoMicrotask() {
             case "completed":
                 return tasks[_todolistID].filter(t => t.isDone === true);
             default:
-                return tasks;
+                return tasks[_todolistID];
         }
     }
 
     // let tasksForTodolist = tasks;
     let tasksForTodolist = filterTasks(todolistID, filter);
-
 
     function changeFilter(value: FilterValuesType) {
         setFilter(value);
